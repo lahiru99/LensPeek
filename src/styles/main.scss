@@ -1,0 +1,77 @@
+@import "./_variables.scss";
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: $color-bg;
+  color: $color-text;
+  line-height: 1.5;
+
+}
+
+h1,p {
+  margin:0;
+}
+
+// Responsive tweaks
+@media (max-width: 700px) {
+  .app {
+    padding: $spacing-md;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+  .card {
+    padding: $spacing-md;
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: $color-bg-dark;
+    color: $color-text-dark;
+  }
+  .app {
+    background: $color-bg-dark;
+  }
+  .card,
+  .lightbox {
+    background: $color-surface-dark;
+    color: $color-text-dark;
+    border-color: $color-border-dark;
+  }
+  .dropzone {
+    background: $color-surface-dark;
+    color: $color-text-dark;
+    border-color: $color-border-dark;
+  }
+  .card__meta,
+  .lightbox__meta {
+    background: rgba(30, 41, 59, 0.95);
+    color: $color-text-dark;
+  }
+}
+
+.dropzone {
+  border: 2px dashed $color-border;
+  border-radius: $border-radius;
+  padding: $spacing-xl * 2;
+  background-color: $color-surface;
+  text-align: center;
+  color: darken($color-text, 25%);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: darken($color-surface, 5%);
+    border-color: $color-primary;
+  }
+
+  &--active {
+    background-color: lighten($color-primary, 45%);
+    border-color: $color-primary;
+    border-style: solid;
+  }
+}

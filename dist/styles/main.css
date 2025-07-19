@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  line-height: 1.5;
+}
+
+h1, p {
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .app {
+    padding: 1rem;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .card {
+    padding: 1rem;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+  .app {
+    background: #111827;
+  }
+  .card,
+  .lightbox {
+    background: #1f2937;
+    color: #f9fafb;
+    border-color: #374151;
+  }
+  .dropzone {
+    background: #1f2937;
+    color: #f9fafb;
+    border-color: #374151;
+  }
+  .card__meta,
+  .lightbox__meta {
+    background: rgba(30, 41, 59, 0.95);
+    color: #f9fafb;
+  }
+}
+.dropzone {
+  border: 2px dashed #e5e7eb;
+  border-radius: 8px;
+  padding: 4rem;
+  background-color: #ffffff;
+  text-align: center;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.dropzone:hover {
+  background-color: rgb(242.25, 242.25, 242.25);
+  border-color: #3b82f6;
+}
+.dropzone--active {
+  background-color: white;
+  border-color: #3b82f6;
+  border-style: solid;
+}
+
+/*# sourceMappingURL=main.css.map */

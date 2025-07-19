@@ -1,0 +1,24 @@
+//colors
+
+$color-primary: #3b82f6;
+$color-text: #111827;
+$color-bg: #f9fafb;
+$color-surface: #ffffff;
+$color-border: #e5e7eb;
+
+// Dark Mode Colors
+$color-text-dark: #f9fafb;
+$color-bg-dark: #111827;
+$color-surface-dark: #1f2937;
+$color-border-dark: #374151;
+
+// Spacing & Sizing
+$spacing-md: 1rem; 
+$spacing-sm: $spacing-md * 0.5;
+$spacing-lg: $spacing-md * 1.5;
+$spacing-xl: $spacing-md * 2;
+
+// Borders
+$border-radius: 8px;
+$border-width: 1px;
+$border-style: solid;

@@ -4,7 +4,7 @@
   "description": "LensPeek is a zero-framework photo inspector:  \r Drag-n-drop images in the browser → get an instant gallery with camera/lens **EXIF** data, GPS mini-maps, and a responsive masonry layout—built entirely with semantic HTML5, BEM-style SCSS, and vanilla ES modules.",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run sass:watch & npm run serve",
+    "dev": "concurrently \"npm:sass:watch\" \"npm:serve\"",
     "build": "npm run sass:build && npm run js:build",
     "sass:watch": "sass --watch src/styles:dist/styles",
     "sass:build": "sass src/styles:dist/styles --style compressed",
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "esbuild": "^0.25.5",
     "sass": "^1.89.2",
     "serve": "^14.2.4"
