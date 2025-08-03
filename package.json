@@ -19,5 +19,8 @@
     "esbuild": "^0.25.5",
     "sass": "^1.89.2",
     "serve": "^14.2.4"
+  },
+  "dependencies": {
+    "exif-js": "^2.3.0"
   }
 }
