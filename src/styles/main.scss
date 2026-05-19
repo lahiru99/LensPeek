@@ -13,6 +13,34 @@ h1,p {
   margin:0;
 }
 
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: $spacing-lg;
+  margin-top: $spacing-xl;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-surface;
+  border: $border-width $border-style $color-border;
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+.card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.card__meta {
+  padding: $spacing-md;
+  flex: 1 1 auto;
+}
+
 // Responsive tweaks
 @media (max-width: 700px) {
   .app {

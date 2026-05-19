@@ -19,9 +19,7 @@ export function parseExifData(file) {
           shutterSpeed: exifData.ExposureTime
             ? exifData.ExposureTime + 's'
             : 'Unknown',
-          date: exifData.DateTime
-            ? new Date(exifData.DateTime).toLocaleDateString()
-            : 'Unknown',
+          date: exifData.DateTime || null,
           gps:
             exifData.GPSLatitude && exifData.GPSLongitude
               ? {
@@ -38,7 +36,7 @@ export function parseExifData(file) {
           aperture: 'No EXIF data',
           iso: 'No EXIF data',
           shutterSpeed: 'No EXIF data',
-          date: 'No EXIF data',
+          date: null,
           gps: null,
         });
       }

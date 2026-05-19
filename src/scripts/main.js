@@ -3,45 +3,71 @@
 import { setupDragAndDrop } from './drag-drop.js';
 import { parseExifData } from './exif-parser.js';
 
+function appendMetaRow(parent, label, value) {
+  const row = document.createElement('p');
+  const labelEl = document.createElement('strong');
+  labelEl.textContent = `${label}: `;
+  row.append(labelEl, document.createTextNode(String(value)));
+  parent.appendChild(row);
+}
+
+/** EXIF DateTime is "YYYY:MM:DD HH:MM:SS" — format for display, e.g. "12 May 2023". */
+function formatPhotoDate(exifData) {
+  if (exifData.camera === 'No EXIF data') return 'No EXIF data';
+  if (!exifData.date) return 'Unknown';
+
+  const normalized = exifData.date.replace(
+    /^(\d{4}):(\d{2}):(\d{2})/,
+    '$1-$2-$3'
+  );
+  const parsed = new Date(normalized);
+  if (Number.isNaN(parsed.getTime())) return 'Unknown';
+
+  return parsed.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function fillCardMeta(meta, file, exifData) {
+  meta.replaceChildren();
+  appendMetaRow(meta, 'Filename', file.name);
+  appendMetaRow(meta, 'Size', `${(file.size / 1024).toFixed(1)} KB`);
+  appendMetaRow(meta, 'Type', file.type);
+  appendMetaRow(meta, 'Camera', exifData.camera);
+  appendMetaRow(meta, 'Lens', exifData.lens);
+  appendMetaRow(meta, 'Focal Length', exifData.focalLength);
+  appendMetaRow(meta, 'Aperture', exifData.aperture);
+  appendMetaRow(meta, 'ISO', exifData.iso);
+  appendMetaRow(meta, 'Shutter', exifData.shutterSpeed);
+  appendMetaRow(meta, 'Date', formatPhotoDate(exifData));
+}
+
 function showImages(files) {
   const gallery = document.getElementById('gallery');
   gallery.hidden = false;
-  gallery.innerHTML = '';
+  gallery.replaceChildren();
 
   files.forEach((file) => {
     if (!file.type.startsWith('image/')) return;
     const url = URL.createObjectURL(file);
 
-    // Create card
     const card = document.createElement('div');
     card.className = 'card';
 
-    // Create image
     const img = document.createElement('img');
     img.src = url;
     img.alt = file.name;
     img.className = 'card__image';
 
-    // Create metadata container
-    const meta = document.createElement('div');
+    const meta = document.createElement('\u0064iv');
     meta.className = 'card__meta';
 
-    // Add image to card
     card.appendChild(img);
 
-    // Add metadata to card
     parseExifData(file).then((exifData) => {
-      console.log('EXIF Data for', file.name, ':', exifData); // Add this line
-      meta.innerHTML = `
-        <p><strong>Filename:</strong> ${file.name}</p>
-        <p><strong>Size:</strong> ${(file.size / 1024).toFixed(1)} KB</p>
-        <p><strong>Type:</strong> ${file.type}</p>
-        <p><strong>Camera:</strong> ${exifData.camera}</p>
-        <p><strong>Lens:</strong> ${exifData.lens}</p>
-        <p><strong>Focal Length:</strong> ${exifData.focalLength}</p>
-        <p><strong>Aperture:</strong> ${exifData.aperture}</p>
-        <p><strong>ISO:</strong> ${exifData.iso}</p>
-      `;
+      fillCardMeta(meta, file, exifData);
     });
 
     card.appendChild(meta);

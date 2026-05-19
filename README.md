@@ -30,3 +30,6 @@ cd lenspeek
 npm install
 npm run dev            # local server + watch
 npm run build          # compile SCSS & bundle JS to /dist
+```
+
+Full project reference (structure, scripts, gaps vs planned features): [PROJECT.md](./PROJECT.md).
